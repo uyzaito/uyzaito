@@ -11,6 +11,7 @@ requirements = [
     'Flask>=0.8',
     'six>=1.3.0',
     'pytz',
+    'python-crontab', 
 ]
 
 
