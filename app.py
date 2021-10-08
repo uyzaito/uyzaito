@@ -70,7 +70,7 @@ class Todo(Resource):
         #def scheduledTask():
         #    os.system("task")
         #    print("This task is running every 5 seconds")
-        scheduler.add_job(id =(job_id), func = scheduledTask, trigger = 'cron', seconds = 5,  minute="*",  week="*", day_of_week="*")
+        #scheduler.add_job(id =(job_id), func = scheduledTask, trigger = 'cron', seconds = 5,  minute="*",  week="*", day_of_week="*")
 
         return task, 201
 
