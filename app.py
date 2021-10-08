@@ -1,14 +1,14 @@
 from flask import Flask
 from flask_restful import reqparse, abort, Api, Resource
-from flask_apscheduler import APScheduler
+#from flask_apscheduler import APScheduler
 from crontab import CronTab
 
 import os
 os.system("echo Hello from the other side!")
 
 # set configuration values scheduler settings
-class Config:
-    SCHEDULER_API_ENABLED = True
+#class Config:
+#    SCHEDULER_API_ENABLED = True
 
 # crear
 app = Flask(__name__)
@@ -17,11 +17,11 @@ app.config.from_object(Config())
 api = Api(app)
 
 # initialize scheduler
-scheduler = APScheduler()
+#scheduler = APScheduler()
 # if you don't wanna use a config, you can set options here:
 # scheduler.api_enabled = True
-scheduler.init_app(app)
-scheduler.start()
+#scheduler.init_app(app)
+#scheduler.start()
 
 
 TODOS = {
