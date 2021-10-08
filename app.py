@@ -12,7 +12,7 @@ os.system("echo Hello from the other side!")
 
 # crear
 app = Flask(__name__)
-app.config.from_object(Config())
+#app.config.from_object(Config())
 
 api = Api(app)
 
