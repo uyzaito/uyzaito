@@ -3,10 +3,13 @@ import os
 
 
 class comm(Resource):
-    def get(task):   
+    def get(self, job_id): 
+        print(job_id) 
         pass
-    def post(task):
-        print("Post------------ self")
-        #teclas = task('task')
-        #os.system(teclas)
-        pass
+    def post(self, job_id, task): 
+        print("--------Post to comm--------")
+        print (job_id)        
+        os.system(task["task"])
+        return job_id, task, 201
+
+        

@@ -8,12 +8,12 @@ app = Flask(__name__)
 api_bp = Blueprint('api', __name__)
 api = Api(app)
 
-TODOS = {
+PEJX = {
     'job1': {'task': 'php ass pitch', 'time': '* * * * *', 'state': 'active'},
 }
 
 def abort_if_todo_doesnt_exist(job_id):
-    if job_id not in TODOS:
+    if job_id not in PEJX:
         abort(404, message="Todo {} doesn't exist".format(job_id))
 
 parser = reqparse.RequestParser()
@@ -26,34 +26,36 @@ parser.add_argument('state')
 class Todo(Resource):
     def get(self, job_id):
         abort_if_todo_doesnt_exist(job_id)
-        return TODOS[job_id] 
+        return PEJX[job_id] 
 
     def delete(self, job_id):
         abort_if_todo_doesnt_exist(job_id)
-        del TODOS[job_id]
+        click.delete(job_id)
+        del PEJX[job_id]
         return '', 204
 
     def put(self, job_id):
         args = parser.parse_args()
         task = {'task': args['task'],'time': args['time'], 'state': args['state']}
-        TODOS[job_id] = task
-        comm.post(task, job_id, args)
-        #click.post(task)
+        PEJX[job_id] = task
+        # Evaluacion de post
+        #comm.eval(self, job_id, task)
+        click.post(self, job_id, task)
         return task, 201        
 
 
 # TodoList
-# shows a list of all todos, and lets you POST to add new tasks
+# shows a list of all PEJX, and lets you POST to add new tasks
 class TodoList(Resource):
     def get(self):
-        return TODOS
+        return PEJX
 
     def post(self):
         args = parser.parse_args()
-        #job_id = int(max(TODOS.keys()).lstrip('todo')) + 1
+        #job_id = int(max(PEJX.keys()).lstrip('todo')) + 1
         #job_id = 'todo%i' % job_id
-        #TODOS[job_id] = {'task': args['task']}
-        return TODOS, 201
+        #PEJX[job_id] = {'task': args['task']}
+        return PEJX, 201
 
 ##
 ## Actually setup the Api resource routing here
