@@ -2,10 +2,12 @@ from flask_restful import Resource
 import os
 
 
-class comm(Resource):
+class Comm(Resource):
+    
     def get(self, job_id): 
         print(job_id) 
         pass
+
     def post(self, job_id, task): 
         print("--------Post to comm--------")
         print (job_id)        

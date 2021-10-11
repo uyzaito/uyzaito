@@ -1,29 +1,31 @@
 from flask_restful import Resource
-from flask_restful.resources.comm import comm
+from flask_restful.resources.comm import Comm
 import threading
 import schedule
 import time
 
 
-class click(Resource):
-    def get(self, job_id):
-        print(job_id)   
-        pass
+class Click(Resource):        
+
+    def get(job_id):
+        for thread in threading.enumerate(): 
+            print(thread.name)
+        #print(job_id)   
+        return thread.name
 
     def delete(job_id):
         print(job_id)
-        
         return  
 
     def post(self, job_id, task):            
-
+        romper = False
         def background_job():
             print('Hello from the background thread')
             print(job_id)
-            #print(task["time"])
-            comm.post(self, job_id, task)
+            print(task["time"])
+            Comm.post(self, job_id, task)
 
-        schedule.every(1).seconds.do(background_job)
+        sched = schedule.every().seconds.do(background_job)
         #schedule.every().minutes.do(background_job)
         #schedule.every().hours.do(background_job)
         #schedule.every().days.do(background_job)
@@ -52,7 +54,9 @@ class click(Resource):
                         time.sleep(interval)
 
             continuous_thread = ScheduleThread()
+            continuous_thread.name = job_id
             continuous_thread.start()
+
             return cease_continuous_run
 
         # Start the background thread

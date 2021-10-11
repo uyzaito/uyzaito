@@ -1,7 +1,8 @@
+from threading import Thread
 from flask import Flask, Blueprint
 from flask_restful import reqparse, abort, Api, Resource
-from flask_restful.resources.comm import comm
-from flask_restful.resources.scheduler import click
+from flask_restful.resources.comm import Comm
+from flask_restful.resources.scheduler import Click
 
 app = Flask(__name__)
 #app.config.from_object(Config())
@@ -21,17 +22,18 @@ parser.add_argument('task')
 parser.add_argument('time')
 parser.add_argument('state')
 
+
 # Todo
 # shows a single todo item and lets you delete a todo item
 class Todo(Resource):
     def get(self, job_id):
         abort_if_todo_doesnt_exist(job_id)
-        return PEJX[job_id] 
+        return Click.get(job_id), PEJX[job_id] 
 
     def delete(self, job_id):
         abort_if_todo_doesnt_exist(job_id)
-        click.delete(job_id)
         del PEJX[job_id]
+        Click.delete(job_id)
         return '', 204
 
     def put(self, job_id):
@@ -39,8 +41,8 @@ class Todo(Resource):
         task = {'task': args['task'],'time': args['time'], 'state': args['state']}
         PEJX[job_id] = task
         # Evaluacion de post
-        #comm.eval(self, job_id, task)
-        click.post(self, job_id, task)
+        #Comm.eval(self, job_id, task)
+        Click.post(self, job_id, task)
         return task, 201        
 
 
