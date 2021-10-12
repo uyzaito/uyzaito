@@ -18,19 +18,18 @@ class Click(Resource):
         return  
 
     def post(self, job_id, task):            
-        romper = False
+
         def background_job():
             print('Hello from the background thread')
-            print(job_id)
             print(task["time"])
             Comm.post(self, job_id, task)
 
-        sched = schedule.every().seconds.do(background_job)
-        #schedule.every().minutes.do(background_job)
-        #schedule.every().hours.do(background_job)
-        #schedule.every().days.do(background_job)
-        #schedule.every().weeks.do(background_job)
-        schedule.run_pending()
+        schedule.every(5).seconds.do(background_job)
+        schedule.every(5).minutes.do(background_job)
+        schedule.every(5).hours.do(background_job)
+        schedule.every(5).days.do(background_job)
+        schedule.every(5).weeks.do(background_job)
+        #schedule.run_pending()
         
 
         def run_continuously(interval=1):

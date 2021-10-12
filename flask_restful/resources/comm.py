@@ -1,7 +1,6 @@
 from flask_restful import Resource
 import os
 
-
 class Comm(Resource):
     
     def get(self, job_id): 

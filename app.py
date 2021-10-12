@@ -1,4 +1,3 @@
-from threading import Thread
 from flask import Flask, Blueprint
 from flask_restful import reqparse, abort, Api, Resource
 from flask_restful.resources.comm import Comm
@@ -7,7 +6,7 @@ from flask_restful.resources.scheduler import Click
 app = Flask(__name__)
 #app.config.from_object(Config())
 api_bp = Blueprint('api', __name__)
-api = Api(app)
+api = Api(api_bp)
 
 PEJX = {
     'job1': {'task': 'php ass pitch', 'time': '* * * * *', 'state': 'active'},
